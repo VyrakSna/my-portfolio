@@ -1,0 +1,397 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+/* ===== CSS VARIABLES & RESET ===== */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gold-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  --dark-bg: #0f0f23;
+  --dark-surface: #1a1a2e;
+  --text-primary: #ffffff;
+  --text-secondary: #b8b8d1;
+  --accent-coral: #ff6b6b;
+  --accent-cyan: #4ecdc4;
+  --accent-purple: #667eea;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 87, 108, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+  z-index: -1;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background: rgba(15, 15, 35, 0.8);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.header p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  user-select: none;
+  letter-spacing: -0.5px;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.navbar>li {
+  padding: 0.75rem 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  position: relative;
+}
+
+.navbar>li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 2px;
+  background: var(--accent-gradient);
+  transition: transform 0.3s ease;
+}
+
+.navbar>li:hover {
+  color: var(--text-primary);
+  background: var(--glass-bg);
+  transform: translateY(-2px);
+}
+
+.navbar>li:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.navbar>li:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* ===== LAYOUT ===== */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== HERO SECTION (LAYOUT-1) ===== */
+.layout-1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  padding: 4rem;
+  gap: 4rem;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.intro>p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.intro-name {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 1rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f5576c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientFlow 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientFlow {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.intro-desc {
+  display: block;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  max-width: 90%;
+}
+
+.btn-contact {
+  margin-top: 1.5rem;
+  padding: 1rem 2.5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--gold-gradient);
+  color: #1a1a2e;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(246, 211, 101, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.btn-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-contact:hover::before {
+  left: 100%;
+}
+
+.btn-contact:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(246, 211, 101, 0.4);
+}
+
+.btn-contact:active {
+  transform: translateY(-1px);
+}
+
+/* ===== IMAGE SECTION ===== */
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.image>.background {
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  border-radius: 30px;
+  overflow: hidden;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.image>.background:hover {
+  transform: translateY(-10px);
+}
+
+.image>.background::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg,
+      transparent 0deg,
+      var(--accent-purple) 90deg,
+      transparent 180deg,
+      var(--accent-cyan) 270deg,
+      transparent 360deg);
+  animation: rotate 8s linear infinite;
+  opacity: 0.3;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== SECTIONS (ABOUT, SKILLS, PROJECTS, CONTACT) ===== */
+.section {
+  padding: 6rem 4rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== LAYOUT-2 (PLACEHOLDER) ===== */
+.layout-2 {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  font-size: 2rem;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-secondary);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .layout-1 {
+    grid-template-columns: 1fr;
+    padding: 3rem 2rem;
+  }
+
+  .intro-name {
+    font-size: 3.5rem;
+  }
+
+  .header {
+    padding: 1.5rem 2rem;
+  }
+
+  .section {
+    padding: 4rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    gap: 0;
+  }
+
+  .navbar>li {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .intro-name {
+    font-size: 2.5rem;
+  }
+
+  .intro-desc {
+    font-size: 1rem;
+  }
+
+  .header p {
+    font-size: 1.25rem;
+  }
+}

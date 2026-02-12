@@ -1,0 +1,15 @@
+$primary: blue;
+$fontWhite: wheat;
+
+@mixin test {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+body {
+  @include test;
+  background-color: $primary;
+  color: $fontWhite;
+  // padding: 1;
+}
